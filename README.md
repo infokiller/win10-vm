@@ -94,7 +94,8 @@ Secure Boot (which is needed for security compliance), you must get WHQL-signed
 drivers, which are only available in RHEL (RedHat Enterprise Linux) and CentOS.
 
 The [build.sh](./build.sh) script automatically downloaded and verify the latest
-available virtio-win package from CentOS, and extract the virtio-win.iso to `./virtio/out`.
+available virtio-win package from CentOS, and extract the virtio-win.iso to
+`./virtio/out`.
 
 You can also do this manually by downloading the rpm from
 [the CentOS packages mirror](http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages).
@@ -125,10 +126,13 @@ and use it to automatically unlock BitLocker.
 
 ## References
 
-- <https://github.com/ohthehugemanatee/win10vm>: libvirt config for a performant
-  Windows 10 VM
 - [Improve QEMU VM performance](https://wiki.archlinux.org/index.php/QEMU#Improve_virtual_machine_performance)
   section from the Arch wiki.
+- [Further performance tuning](https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF#Performance_tuning)
+  tips from the Arch Wiki article about PCI-passthrough (should be applicable to
+  BIOS based VMs as well?)
+- <https://github.com/ohthehugemanatee/win10vm>: libvirt config for a performant
+  Windows 10 VM
 - [libvirt mailing list post](https://www.redhat.com/archives/libvir-list/2019-January/msg01004.html)
   with a great explanation on how UEFI works in QEMU and libvirt.
 - [OpenStack docs](https://specs.openstack.org/openstack/nova-specs/specs/train/approved/allow-secure-boot-for-qemu-kvm-guests.html)
