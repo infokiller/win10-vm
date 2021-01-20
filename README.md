@@ -13,9 +13,6 @@ BitLocker enabled.
 - [Secure Boot](#secure-boot)
   - [Using UEFI firmware with the required keys](#using-uefi-firmware-with-the-required-keys)
   - [Installing WHQL signed Virtio drivers](#installing-whql-signed-virtio-drivers)
-  - [Register for a RHEL trial](#register-for-a-rhel-trial)
-  - [Downloading WHQL-signed virtio-win rpm via Docker](#downloading-whql-signed-virtio-win-rpm-via-docker)
-  - [Downloading WHQL-signed virtio-win rpm via a VM](#downloading-whql-signed-virtio-win-rpm-via-a-vm)
   - [Installing the Virtio drivers in Windows](#installing-the-virtio-drivers-in-windows)
 - [BitLocker](#bitlocker)
 - [References](#references)
@@ -79,9 +76,8 @@ Microsoft keys. Options you have:
 
 - Some Linux distros ship a `OVMF_VARS.fd` file that already contains the keys,
   so you can just use it. In Debian/Ubuntu the file is
-  `/usr/share/OVMF/OVMF_VARS.ms.fd`. The `build.sh` script in
-  [win10-vm](https://gitlab.com/infokiller/win10-vm) will build an Ubuntu Docker
-  container and copy the OVMF files to the host.
+  `/usr/share/OVMF/OVMF_VARS.ms.fd`. The [build.sh](./build.sh) script in will
+  build an Ubuntu Docker container and copy the OVMF files to the host.
 - <https://github.com/rhuefi/qemu-ovmf-secureboot> can generate a file with the
   keys included
 - You can enroll the keys manually in the UEFI firmware UI
@@ -95,38 +91,22 @@ cause issues with Secure Boot
 ([reference](https://teams.microsoft.com/l/message/19:c0b91625615749b7bab11ca6cacb4784@thread.skype/1590069755600?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=5e84b409-683b-44b3-af81-a2900a48b8a7&parentMessageId=1589810528154&teamName=Microsoft%20%E2%9D%A4%20Linux&channelName=Windows%20VM%20tips%2C%20tricks%2C%20and%20help&createdTime=1590069755600)).
 Therefore, to use Virtio drivers (which is recommended for VM performance) and
 Secure Boot (which is needed for security compliance), you must get WHQL-signed
-drivers, which are only available in RHEL (RedHat Enterprise Linux). Here are
-the steps for getting these drivers:
+drivers, which are only available in RHEL (RedHat Enterprise Linux) and CentOS.
 
-### Register for a RHEL trial
+> TODO: update the [build.sh](./build.sh) script in this repo to download and
+> verify the virtio-win rpm package, and extract the extract the iso.
 
-First, you must
-[register](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/try-it)
-for a Red Hat Enterprise trial (may need to create an account) and note the
-username and password. Then, you can use either a VM or a container with RHEL.
+You can do this manually by download the rpm from
+[the CentOS packages mirror](http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages).
+You will then need to extract the iso file from the rpm file and copy it to the
+host. This can be done
+[in multiple ways](https://stackoverflow.com/questions/18787375/how-do-i-extract-the-contents-of-an-rpm),
+for example:
 
-### Downloading WHQL-signed virtio-win rpm via Docker
-
-The `build.sh` script in [win10-vm](https://gitlab.com/infokiller/win10-vm) will
-build a new Docker container. You must export `RHEL_USERNAME` and
-`RHEL_PASSWORD` for it to work.
-
-### Downloading WHQL-signed virtio-win rpm via a VM
-
-- Download the RHEL Linux Server iso file
-- Install the RHEL into a new VM which can be done easily with virt-manager
-- Run `sudo subscription-manager register --auto-attach` to activate the RHEL
-  subscription
-- Run `sudo dnf download virtio-win` inside the VM to download the `virtio-win`
-  package
-- Extract the iso file with the drivers from the rpm file and copy it to the
-  host. This can be done
-  [in multiple ways](https://stackoverflow.com/questions/18787375/how-do-i-extract-the-contents-of-an-rpm),
-  for example:
-  - `file-roller --extract-here virtio-win-*.rpm`
-  - `rpm2cpio virtio-win-*.rpm | cpio -idmv` (will definitely work inside the
-    guest, may require installation in the host depending on the Linux
-    distribution)
+- `file-roller --extract-here virtio-win-*.rpm`
+- `rpm2cpio virtio-win-*.rpm | cpio -idmv` (will definitely work inside the
+  guest, may require installation in the host depending on the Linux
+  distribution)
 
 ### Installing the Virtio drivers in Windows
 
