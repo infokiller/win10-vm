@@ -14,22 +14,11 @@ _print_error() {
 }
 
 get_virtio_drivers() {
-  if [[ -z "${RHEL_USERNAME-}" ]]; then
-    _print_error 'You must provide the RHEL_USERNAME variable'
-    return 1
-  fi
-  if [[ -z "${RHEL_PASSWORD-}" ]]; then
-    return 1
-    _print_error 'You must provide the RHEL_PASSWORD variable'
-  fi
   (
     # shellcheck disable=SC2030
     export DOCKER_BUILDKIT=1
     cd virtio &&
-      docker build -f Dockerfile -t rhel-virtio --output out \
-        --build-arg "RHEL_USERNAME=${RHEL_USERNAME}" \
-        --build-arg "RHEL_PASSWORD=${RHEL_PASSWORD}" \
-        .
+      docker build -f Dockerfile -t rhel-virtio --output out .
   )
 }
 

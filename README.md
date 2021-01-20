@@ -77,7 +77,7 @@ Microsoft keys. Options you have:
 - Some Linux distros ship a `OVMF_VARS.fd` file that already contains the keys,
   so you can just use it. In Debian/Ubuntu the file is
   `/usr/share/OVMF/OVMF_VARS.ms.fd`. The [build.sh](./build.sh) script in will
-  build an Ubuntu Docker container and copy the OVMF files to the host.
+  build an Ubuntu Docker container and copy the OVMF files to `./ovmf/out`.
 - <https://github.com/rhuefi/qemu-ovmf-secureboot> can generate a file with the
   keys included
 - You can enroll the keys manually in the UEFI firmware UI
@@ -93,10 +93,10 @@ Therefore, to use Virtio drivers (which is recommended for VM performance) and
 Secure Boot (which is needed for security compliance), you must get WHQL-signed
 drivers, which are only available in RHEL (RedHat Enterprise Linux) and CentOS.
 
-> TODO: update the [build.sh](./build.sh) script in this repo to download and
-> verify the virtio-win rpm package, and extract the extract the iso.
+The [build.sh](./build.sh) script automatically downloaded and verify the latest
+available virtio-win package from CentOS, and extract the virtio-win.iso to `./virtio/out`.
 
-You can do this manually by download the rpm from
+You can also do this manually by downloading the rpm from
 [the CentOS packages mirror](http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages).
 You will then need to extract the iso file from the rpm file and copy it to the
 host. This can be done

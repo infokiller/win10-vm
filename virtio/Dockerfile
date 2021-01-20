@@ -1,14 +1,10 @@
-FROM registry.access.redhat.com/ubi8/ubi AS build
+FROM centos:latest AS build
 
-ARG RHEL_USERNAME
-ARG RHEL_PASSWORD
-
-RUN subscription-manager register --auto-attach \
-    --username "${RHEL_USERNAME}" --password "${RHEL_PASSWORD}"
 RUN dnf update -y
 RUN mkdir -p /output
 WORKDIR /output
-RUN dnf download -y virtio-win
+RUN dnf install -y --downloadonly --downloaddir=/output virtio-win
+RUN bash -c 'rpm2cpio /output/virtio-win-*.rpm | cpio -idmv'
 
 FROM scratch AS export-stage
-COPY --from=build /output /
+COPY --from=build /output/usr/share/virtio-win/virtio-win.iso /
