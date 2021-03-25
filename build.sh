@@ -25,7 +25,7 @@ get_virtio_drivers() {
     # shellcheck disable=SC2030
     export DOCKER_BUILDKIT=1
     cd virtio &&
-      docker build -f Dockerfile -t rhel-virtio --output out .
+      docker build -f Dockerfile -t centos-virtio --output out .
   )
 }
 
