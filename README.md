@@ -93,9 +93,9 @@ Therefore, to use Virtio drivers (which is recommended for VM performance) and
 Secure Boot (which is needed for security compliance), you must get WHQL-signed
 drivers, which are only available in RHEL (RedHat Enterprise Linux) and CentOS.
 
-The [build.sh](./build.sh) script automatically downloaded and verify the latest
-available virtio-win package from CentOS, and extract the virtio-win.iso to
-`./virtio/out`.
+The [build.sh](./build.sh) script automatically downloads and verifies the
+latest available virtio-win package from CentOS, and extracts the virtio-win.iso
+to `./virtio/out`.
 
 You can also do this manually by downloading the rpm from
 [the CentOS packages mirror](http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages).
