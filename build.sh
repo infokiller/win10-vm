@@ -24,8 +24,7 @@ get_virtio_drivers() {
   (
     # shellcheck disable=SC2030
     export DOCKER_BUILDKIT=1
-    cd virtio &&
-      docker build -f Dockerfile -t centos-virtio --output out .
+    docker build -f virtio/Dockerfile -t centos-virtio --output out .
   )
 }
 
@@ -33,7 +32,7 @@ get_ovmf_files() {
   (
     # shellcheck disable=SC2031
     export DOCKER_BUILDKIT=1
-    cd ovmf && docker build -f Dockerfile -t ubuntu-ovmf --output out .
+    docker build -f ovmf/Dockerfile -t ubuntu-ovmf --output out .
   )
 }
 
