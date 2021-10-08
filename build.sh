@@ -3,6 +3,7 @@
 # See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -o errexit -o errtrace -o nounset -o pipefail
 
+# shellcheck disable=SC2155
 readonly DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 # TODO: Use wget/curl to download the packages from the distro mirrors instead
