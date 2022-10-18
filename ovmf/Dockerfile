@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 AS build-stage
+FROM ubuntu:22.04 AS build-stage
 ARG DEBIAN_FRONTEND=noninteractive
 
 # hadolint ignore=DL3008
