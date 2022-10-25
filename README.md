@@ -1,8 +1,8 @@
-# Windows 10 VM
+# Modern Windows VM
 
-This repo contains notes about running a Windows 10 or Windows Server VM in
-Linux (libvirt via QEMU/KVM) with good performance and with Secure Boot and
-BitLocker enabled.
+This repo contains notes about running a Windows 10, Windows 11, or Windows
+Server VM in Linux (libvirt via QEMU/KVM) with good performance and with Secure
+Boot and BitLocker enabled.
 
 ## Table of contents
 
@@ -65,7 +65,7 @@ is sometimes lagging. Another alternative is to install individual components
 ### Using UEFI firmware with the required keys
 
 The UEFI firmware (OVMF in our case) must have the Microsoft keys enrolled in
-order for it to boot Windows 10 in Secure Boot mode.
+order for it to boot Windows 10/11 in Secure Boot mode.
 
 The OVMF package in Linux distros contain two files: one for the UEFI code (can
 be named `OVMF.fd`, `OVMF_CODE.fd`, and `OVMF_CODE.secboot.fd`), and one for the
