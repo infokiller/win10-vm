@@ -10,3 +10,5 @@ RUN apt-get update -y \
 FROM scratch AS export-stage
 COPY --from=build-stage /usr/share/OVMF/OVMF_CODE.ms.fd /
 COPY --from=build-stage /usr/share/OVMF/OVMF_VARS.ms.fd /
+COPY --from=build-stage /usr/share/OVMF/OVMF_CODE_4M.ms.fd /
+COPY --from=build-stage /usr/share/OVMF/OVMF_VARS_4M.ms.fd /

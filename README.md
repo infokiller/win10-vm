@@ -67,17 +67,24 @@ is sometimes lagging. Another alternative is to install individual components
 The UEFI firmware (OVMF in our case) must have the Microsoft keys enrolled in
 order for it to boot Windows 10/11 in Secure Boot mode.
 
-The OVMF package in Linux distros contain two files: one for the UEFI code (can
-be named `OVMF.fd`, `OVMF_CODE.fd`, and `OVMF_CODE.secboot.fd`), and one for the
-UEFI variables, usually named `OVMF_VARS.fd`.
+The OVMF package in Linux distros contain two files:
+
+1. The UEFI code which can be named `OVMF.fd`, `OVMF_CODE.fd`, and
+   `OVMF_CODE.secboot.fd`
+2. The UEFI variables, usually named `OVMF_VARS.fd`.
+
+In addition, distros with an updated OVMF package provide `4M` variants which
+add a matching suffix, for example `OVMF_4M.fd` in Debian. You will want to use
+the `4M` variant, since
+[some updates require it](https://github.com/tianocore/edk2/discussions/3221).
 
 To get Secure Boot working, you must use a `OVMF_VARS.fd` file that contains the
 Microsoft keys. Options you have:
 
 - Some Linux distros ship a `OVMF_VARS.fd` file that already contains the keys,
   so you can just use it. In Debian/Ubuntu the file is
-  `/usr/share/OVMF/OVMF_VARS.ms.fd`. The [build.sh](./build.sh) script in will
-  build an Ubuntu Docker container and copy the OVMF files to `./out`.
+  `/usr/share/OVMF/OVMF_VARS_4M.ms.fd`. The [build.sh](./build.sh) script in
+  will build an Ubuntu Docker container and copy the OVMF files to `./out`.
 - <https://github.com/rhuefi/qemu-ovmf-secureboot> can generate a file with the
   keys included
 - You can enroll the keys manually in the UEFI firmware UI
